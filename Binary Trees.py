@@ -11,6 +11,19 @@ class Node(object):
 class BinaryTree(object):
     def __init__(self, root):
         self.root = Node(root)
+       
+        
+    def search(self, node, key):
+        # Base case: if the root is non existant or if the key is stored in root
+        # return root node
+        if node is None or node.value == key:
+            return node
+        # If the value in node is greater than key, search the left tree
+        elif node.value > key:
+            return self.search(node.left, key)
+        # If the key is greater than node value, search the right sub tree
+        elif node.value < key:
+            return self.search(node.right, key)
 
 
     def preorder_print(self, start, traversal):
@@ -106,10 +119,10 @@ class BinaryTree(object):
 
 
 if __name__ == "__main__":
-    tree = BinaryTree(1)
+    tree = BinaryTree(3)
     tree.root.left = Node(2)
-    tree.root.right = Node(3)
-    tree.root.left.left = Node(4)
-    tree.root.left.right = Node(5)
+    tree.root.right = Node(4)
+    tree.root.left.left = Node(1)
+    tree.root.right.right = Node(5)
 
     print(tree.size_(tree.root))
