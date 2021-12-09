@@ -24,6 +24,19 @@ class BinaryTree(object):
         # If the key is greater than node value, search the right sub tree
         elif node.value < key:
             return self.search(node.right, key)
+     
+    
+    def insert(self, node, value):
+        if value < node.value:
+            if node.left is None:
+                node.left = Node(value)
+            else:
+                return self.insert(node.left, value)
+        elif value > node.value:
+            if node.right is None:
+                node.right = Node(value)
+            else:
+                return self.insert(node.right, value)
 
 
     def preorder_print(self, start, traversal):
