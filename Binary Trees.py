@@ -38,6 +38,38 @@ class BinaryTree(object):
             else:
                 return self.insert(node.right, value)
 
+            
+    def minValue(self, node):
+        current = node
+        while current.left is not None:
+            current = current.left
+        return current
+
+
+    def deleteNode(self, node, key):
+        # Base case
+        if node is None:
+            return Node
+
+        if key < node.value:
+            node.left = self.deleteNode(node.left, key)
+        elif key > node.value:
+            node.right = self.deleteNode(node.right, key)
+        else:
+            if node.left is None:
+                temp = node.right
+                node = None
+                return temp
+            if node.right in None:
+                temp = node.left
+                node.left = None
+                return temp
+
+            temp = self.minValue(node.right)
+            node.key = temp.value
+            node.right = self.deleteNode(node.right, temp.value)
+        return node
+
 
     def preorder_print(self, start, traversal):
         if start:
